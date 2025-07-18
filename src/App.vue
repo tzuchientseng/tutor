@@ -4,7 +4,7 @@ import MainView from './views/MainView.vue'
 
 <template>
   <MainView />
-  <button>Btn</button>
+  <!-- <button class="custom-button">Btn</button> -->
 </template>
 
 <style scoped>
