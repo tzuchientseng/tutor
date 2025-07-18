@@ -201,6 +201,11 @@ ul {
     padding: 0;
 }
 
+.profile-image {
+    width: 200px;
+    height: 200px;
+}
+
 /* Media Queries */
 /* Flowchart Responsive Adjustments */
 @media (max-width: 768px) {
@@ -214,6 +219,11 @@ ul {
         line-height: 1.4;
         margin: 0px;
         padding: 3px;
+    }
+
+    .profile-image {
+        width: 100px;
+        height: 100px;
     }
 
     .flowchart {

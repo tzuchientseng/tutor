@@ -77,8 +77,6 @@ document.querySelectorAll('.copy-btn').forEach(button => {
       src="../assets/sunny.jpg" 
       alt="Teacher Sunny's profile photo" 
       style="
-        width: 200px; 
-        height: 200px; 
         border-radius: 50%; 
         display: block; 
         margin: 0 auto 20px; 
