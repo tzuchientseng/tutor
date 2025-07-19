@@ -20,5 +20,6 @@ npm install @vitejs/plugin-vue-jsx --save-dev
 npm install vite-plugin-vue-devtools --save-dev
 npm install vue-router@4
 npm install -g gh-pages
+npm install pinia
 ```
 
