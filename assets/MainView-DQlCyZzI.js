@@ -1,4 +1,4 @@
-import{d as u,c as m,a as e,t as v,w as g,b,e as i,F as w,u as x,o as y}from"./index-bIPz8L4U.js";const f=""+new URL("Education-BHZoZwG1.png",import.meta.url).href,h=""+new URL("sunny-BTDIPeQy.jpg",import.meta.url).href,k=""+new URL("LineQRcode-BMqCtFPv.png",import.meta.url).href,C=""+new URL("MathWeb-BGdoxccl.png",import.meta.url).href,L={id:"tutor-introduction"},S={id:"container"},R=`
+import{d as u,c as m,a as e,t as v,w as g,b,e as i,F as w,u as x,o as y}from"./index-BULyR5a9.js";const f=""+new URL("Education-BHZoZwG1.png",import.meta.url).href,h=""+new URL("sunny-BTDIPeQy.jpg",import.meta.url).href,k=""+new URL("LineQRcode-BMqCtFPv.png",import.meta.url).href,C=""+new URL("MathWeb-BGdoxccl.png",import.meta.url).href,L={id:"tutor-introduction"},S={id:"container"},R=`
 Hi~ 大家好，我是子千老師！
 
 
