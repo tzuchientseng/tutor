@@ -1,0 +1,1 @@
+import{c as r,o as s}from"./index-bIPz8L4U.js";const _=(t,e)=>{const c=t.__vccOpts||t;for(const[n,o]of e)c[n]=o;return c},a={},p={class:"text-center"};function f(t,e){return s(),r("h1",p,"Sign-Up page")}const l=_(a,[["render",f]]);export{l as default};
