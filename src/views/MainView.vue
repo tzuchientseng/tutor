@@ -1,4 +1,18 @@
 <script setup lang="ts">
+import { useRouter } from 'vue-router'
+const router = useRouter()
+
+const goToSignup = () => {
+  if (import.meta.env.DEV) {
+    // 開發環境
+    // router.push('/signup')
+    window.open(`${import.meta.env.BASE_URL}signup`, '_blank')
+  } else {
+    // 部署（GitHub Pages）
+    window.open(`${import.meta.env.BASE_URL}#/signup`, '_blank')
+  }
+}
+
 const teacherIntroduction = `
 Hi~ 大家好，我是子千老師！
 
@@ -97,7 +111,8 @@ document.querySelectorAll('.copy-btn').forEach(button => {
       <li></li>
     </ul>
     <div id="container">
-      <a id="docs" href="https://tutor.sunnytseng.com/register" target="_blank">家教報名!</a>
+      <!-- <a id="docs" href="/signup" target="_blank">家教報名!(Router無法兼顧線上線下)</a> -->
+      <a id="docs" href="#" @click.prevent="goToSignup">家教報名!</a>
     </div>
   </div>
 
@@ -111,7 +126,7 @@ document.querySelectorAll('.copy-btn').forEach(button => {
         <div class="code-container">
           <div class="step-circle">1</div>
          <div class="code-block">
-            <img src="../assets/.png" alt="Form" style="max-width: 20%; height: auto; display: inline-block; border-radius: 12px">
+            <!-- <img src="../assets/.png" alt="Form" style="max-width: 20%; height: auto; display: inline-block; border-radius: 12px"> -->
           </div>
         </div>
         <div class="text-container description">
@@ -126,7 +141,7 @@ document.querySelectorAll('.copy-btn').forEach(button => {
           <div class="step-circle">2</div>
           <div class="code-block">
             <button class="copy-btn">前往</button>
-            <img src="../assets/.png" alt="Lesson" style="max-width: 20%; height: auto; display: inline-block; border-radius: 12px">
+            <!-- <img src="../assets/.png" alt="Lesson" style="max-width: 20%; height: auto; display: inline-block; border-radius: 12px"> -->
           </div>
         </div>
         <div class="text-container description">
@@ -140,7 +155,7 @@ document.querySelectorAll('.copy-btn').forEach(button => {
         <div class="code-container">
           <div class="step-circle">3</div>
           <div class="code-block">
-            <img src="../assets/.png" alt="Calendar" style="max-width: 20%; height: auto; display: inline-block; border-radius: 12px">
+            <!-- <img src="../assets/.png" alt="Calendar" style="max-width: 20%; height: auto; display: inline-block; border-radius: 12px"> -->
           </div>
         </div>
         <div class="text-container description">
@@ -217,8 +232,8 @@ document.querySelectorAll('.copy-btn').forEach(button => {
   <div class="education-summary">
     <h2>👋 更多課程</h2>
     <ul>
-      <li><strong>吉他課程</strong> - XXX</li>
-      <li><strong>魔術課程</strong> - XXX</li>
+      <li><strong>吉他課程</strong> - 課程規劃中...</li>
+      <li><strong>魔術課程</strong> - 課程規劃中...</li>
     </ul>
   </div>
 </template>
