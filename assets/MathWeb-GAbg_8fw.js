@@ -1,0 +1,1 @@
+const t=""+new URL("Education-BHZoZwG1.png",import.meta.url).href,e=""+new URL("sunny-BTDIPeQy.jpg",import.meta.url).href,o=""+new URL("LineQRcode-BMqCtFPv.png",import.meta.url).href,r=""+new URL("MathWeb-BGdoxccl.png",import.meta.url).href;export{t as _,e as a,o as b,r as c};
