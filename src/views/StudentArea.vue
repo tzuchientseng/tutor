@@ -61,4 +61,3 @@ import NavBar from '../components/auth/NavBar.vue'
 }
 </style>
 
-

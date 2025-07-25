@@ -5,13 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "run-p type-check \"build-only {@}\" --",
-    "deploy": "vite build && gh-pages -d dist",
+    "build": "vite build",
+    "type-check": "vue-tsc",
     "preview": "vite preview",
-    "build-only": "vite build",
-    "type-check": "vue-tsc --build",
-    "lint": "eslint . --fix",
-    "format": "prettier --write src/"
+    "deploy": "npm run build && gh-pages -d dist"
   },
   "dependencies": {
     "bootstrap": "^5.3.7",

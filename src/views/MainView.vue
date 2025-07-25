@@ -88,7 +88,7 @@ document.querySelectorAll('.copy-btn').forEach(button => {
 <template>
   <!-- Icon -->
   <div style="text-align: center;">
-    <img src="../../public/images/Education.png" alt="Tutor Image" style="margin-top:20px; max-width: 20%; height: auto; display: inline-block; border-radius: 12px">
+    <img src="../assets/Education.png" alt="Tutor Image" style="margin-top:20px; max-width: 20%; height: auto; display: inline-block; border-radius: 12px">
   </div>
 
   <!-- Introduction 說明 -->
@@ -96,7 +96,7 @@ document.querySelectorAll('.copy-btn').forEach(button => {
     <h2>簡介</h2>
 
     <img 
-      src="../../public/images/sunny.jpg" 
+      src="../assets/sunny.jpg" 
       alt="Teacher Sunny's profile photo" 
       style="
         border-radius: 50%; 
@@ -150,7 +150,7 @@ document.querySelectorAll('.copy-btn').forEach(button => {
           <div class="step-circle">2</div>
           <div class="code-block">
             <button @click="handleLineClick" class="copy-btn">前往</button>
-            <img src="../../public/images/LineQRcode.png" alt="LineQRcode" style="max-width: 40%; height: auto; border-radius: 12px; margin-left: 30%; margin-top: 50px">
+            <img src="../assets/LineQRcode.png" alt="LineQRcode" style="max-width: 40%; height: auto; border-radius: 12px; margin-left: 30%; margin-top: 50px">
           </div>
         </div>
         <div class="text-container description">
@@ -194,7 +194,7 @@ document.querySelectorAll('.copy-btn').forEach(button => {
           <div class="code-block">
             <button  @click="handleMathClick"  class="copy-btn">前往</button>
             <pre><code class="language-text" style="text-align: center;">https://math.sunnytseng.com/</code></pre>
-            <img src="../../public/images/MathWeb.png" alt="MathWeb" style="max-width: 100%; height: auto; border-radius: 12px;">
+            <img src="../assets/MathWeb.png" alt="MathWeb" style="max-width: 100%; height: auto; border-radius: 12px;">
           </div>
         </div>
         <div class="text-container description">

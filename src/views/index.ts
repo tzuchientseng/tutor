@@ -4,19 +4,15 @@ const router = createRouter({
   history: createWebHashHistory(),
   routes: [
     { path: '/', name: 'home', component: () => import('../views/MainView.vue') },
-    { path: '/signup', name: 'signup', component: () => import('../views/SignUp.vue') },
-    { path: '/student-area', name: 'StudentArea', component: () => import('../views/StudentArea.vue') },
-    { path: '/login', name: 'auth', component: () => import('../views/LoginView.vue') },
+    // { path: '/login', name: 'auth', component: () => import('@/views/LoginView.vue') },
   ]
 })
 export default router
 
+
 // import { createRouter, createWebHistory } from 'vue-router'
-// import MainView from '../views/MainView.vue'
+// import MainVeiw from '../views/MainView.vue'
 // import SignUp from '../views/SignUp.vue'
-// import StudentArea from '../views/StudentArea.vue'
-// import Login from '../views/LoginView.vue'
-//
 // // import { useAuthStore } from '@/stores/useAuthStore'
 //
 // const router = createRouter({
@@ -25,22 +21,12 @@ export default router
 //     {
 //       path: '/',
 //       name: 'home',
-//       component: MainView,
+//       component: MainVeiw,
 //     },
 //     {
 //       path: '/signup',
 //       name: 'signup',
 //       component: SignUp,
-//     },
-//     {
-//       path: '/student-area',
-//       name: 'StudentArea',
-//       component: StudentArea,
-//     },
-//     {
-//       path: '/login',
-//       name: 'auth',
-//       component: Login,
 //     },
 //   ],
 // })

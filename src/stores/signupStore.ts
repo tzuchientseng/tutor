@@ -15,8 +15,8 @@
 }
 */
 
-// const API_URL = 'https://home.sunnytseng.com/api/tutor' // `npm run deploy`
-const API_URL = 'api/tutor/'
+const API_URL = 'https://home.sunnytseng.com/api/tutor' // `npm run deploy`
+// const API_URL = 'api/tutor/'
 
 import { defineStore } from 'pinia'
 

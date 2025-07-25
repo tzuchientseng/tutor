@@ -1,0 +1,679 @@
+/* Fonts */
+@font-face {
+    font-family: 'Gotham Medium';
+    src: url('Gotham-Medium.woff2') format('woff2'),
+         url('Gotham-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Gotham Book';
+    src: url('Gotham-Book.woff2') format('woff2'),
+         url('Gotham-Book.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Gotham Medium';
+}
+
+p, span, li, a {
+    font-family: 'Gotham Book';
+}
+
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #0e2a38;
+    color: #ffffff;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;  
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Logo */
+.logo {
+    width: 50px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+/* Navbar */
+.navbar-light .navbar-nav .nav-link {
+    color: black;
+    margin: 0 3px;
+    text-transform: uppercase;
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 1px;
+}
+
+/* Flowchart Container */
+.flowchart-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Flowchart */
+.flowchart {
+    background-color: #142b3a;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    max-width: 1200px;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.step {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 20px 0;
+    width: 100%;
+    position: relative;
+}
+
+.step-circle {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 40px;
+    background-color: #29b6f6;
+    color: #0e2a38;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 1.2em;
+    z-index: 2;
+}
+
+.dotted-line {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    background: repeating-linear-gradient(
+        to bottom,
+        #29b6f6,
+        #29b6f6 5px,
+        transparent 5px,
+        transparent 10px
+    );
+    height: 100%;
+    z-index: 1;
+}
+
+.code-container,
+.text-container {
+    width: 45%;
+    padding: 20px;
+}
+
+/* Animation Elements */
+.code-block,
+.text-container.description,
+.education-summary {
+    opacity: 0;
+    transition: transform 0.8s ease-out, opacity 0.8s ease-out;
+}
+
+/* Code Block Animations (Slide in from right) */
+.code-block {
+    transform: translateX(20%);
+}
+
+.code-block.in-view {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+/* Text Container Animations (Slide in from left) */
+.text-container.description {
+    transform: translateX(-20%);
+}
+
+.text-container.description.in-view {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+/* Centering and Animation for Education Summary */
+.education-summary {
+    margin: 40px auto;
+    max-width: 800px;
+    text-align: center;
+    transform: scale(0.5);
+    transform-origin: center;
+    opacity: 0;
+    transition: transform 0.8s ease-out, opacity 0.8s ease-out;
+}
+
+.education-summary.in-view {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.code-block code {
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #ccc;  
+}
+
+code {
+    color: inherit;
+    display: block;
+    white-space: pre-wrap;
+    padding: 10px 0;
+    font-family: Consolas, "Courier New", monospace;
+    word-wrap: break-word;
+}
+
+/* Headings and Text */
+h2 {
+    color: #29b6f6;
+    margin: 5px 0;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+/* Media Queries */
+/* Flowchart Responsive Adjustments */
+@media (max-width: 768px) {
+    .flowchart {
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    .code-container,
+    .text-container {
+        width: 100%;
+    }
+
+    .step {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .dotted-line {
+        left: 0%;
+        transform: none;
+    }
+}
+
+/* Slide Styles */
+.slide {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+}
+
+#slide1 {
+    background-image: url('../image/23.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100vh;
+}
+
+#slide2 {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+}
+
+/* Insert an empty pseudo-element before #slide2 content */
+#slide2::before {
+    content: "";
+    background-image: url('../image/curry.png');
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.7;
+    z-index: -1;
+}
+
+/* Navigation */
+.nav2 {
+    position: absolute;
+    top: 9px;
+    right: 20px;
+}
+
+.upper {
+    padding-top: 110px;
+}
+
+.upper h2 {
+    font-size: 41px;
+    margin-bottom: 0;
+}
+
+.upper p {
+    font-size: 14px;
+    color: black;
+}
+
+.upper p a {
+    color: black;
+}
+
+.lower .btn1,
+.lower .btn2 {
+    padding: 10px 40px;
+    border-radius: 30px;
+    font-size: 12px;
+    width: 250px;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    margin: 0 8px;
+}
+
+.lower .btn1 {
+    background: #171a20;
+    color: white;
+}
+
+.lower .btn2 {
+    background: rgba(255, 255, 255, 0.5);
+    color: black;
+}
+
+.lower .arrow {
+    margin-top: 15px;
+    display: inline-block;
+}
+
+.lower {
+    position: absolute;
+    bottom: 20px;
+    text-align: center;
+    width: 100%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+}
+
+/* Responsive Adjustments */
+@media only screen and (max-width: 990px) {
+    .logo {
+        width: 100px;
+        top: 20px;
+        right: 20px;
+        left: auto;
+    }
+
+    .navbar {
+        background: white;
+    }
+
+    .nav2 {
+        position: relative;
+        right: auto;
+        top: 0;
+    }
+}
+
+/* Button Styles */
+button,
+pre button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+button {
+    padding: 12px 24px;
+}
+
+pre button {
+    padding: 6px 12px;
+    font-size: 12px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+/* Code Block Copy Button */
+.copy-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px 10px;
+    background-color: #29b6f6;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 12px;
+    display: none;
+}
+
+.copy-btn:hover {
+    background-color: #1e88e5;
+    animation: shake 500ms;
+}
+
+/* Show the copy button when hovering over the code block */
+.code-block:hover .copy-btn {
+    display: block;
+}
+
+/* Adjust Prism.js Code Styling */
+.code-block pre {
+    margin: 0;
+    background: transparent;
+}
+
+.code-block code {
+    background: transparent;
+    padding: 0;
+    color: inherit;
+}
+
+/* Tutor Introduction Section */
+#tutor-introduction {
+    padding: 25px;
+    background-color: #7eaddb;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    max-width: 1000px;
+    margin: 30px auto;
+    transform: translateY(20px);
+    opacity: 0;
+    animation: fadeIn 0.8s ease-out forwards;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Make sure it is properly centered on smaller screens */
+@media (max-width: 768px) {
+    #tutor-introduction {
+        padding: 20px;
+        width: 90%;
+        margin: 20px auto;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+}
+
+@media (max-width: 480px) {
+    #tutor-introduction {
+        width: 95%;
+        padding: 15px;
+        margin: 15px auto;
+    }
+}
+
+#tutor-introduction:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Heading Styling with Slide-in Effect */
+#tutor-introduction h2 {
+    font-size: 2rem;
+    color: #1976d2;
+    text-align: center;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    border-bottom: 2px solid #1976d2;
+    padding-bottom: 10px;
+    letter-spacing: 1px;
+    opacity: 0;
+    animation: slideInFromLeft 1s ease-out forwards;
+    animation-delay: 0.2s;
+    position: relative;
+}
+
+/* Paragraphs with Fade-in and Staggered Animation */
+#tutor-introduction p {
+    font-size: 1rem;
+    color: #444444;
+    line-height: 1.8;
+    margin-bottom: 15px;
+    text-align: justify;
+    opacity: 0;
+    animation: fadeInUp 0.6s ease-out forwards;
+    animation-delay: 0.4s;
+}
+
+#tutor-introduction p:nth-of-type(2) {
+    animation-delay: 0.6s;
+}
+
+#tutor-introduction p:nth-of-type(3) {
+    animation-delay: 0.8s;
+}
+
+/* List Items with Bounce-in Animation */
+#tutor-introduction ul {
+    padding-left: 20px;
+    margin: 15px 0;
+    opacity: 0;
+    animation: fadeIn 0.8s ease-out forwards;
+    animation-delay: 1s;
+}
+
+#tutor-introduction ul li {
+    font-size: 1rem;
+    line-height: 1.6;
+    padding: 5px 0;
+    position: relative;
+    padding-left: 20px;
+    opacity: 0;
+    transform: translateX(-20px);
+    animation: bounceIn 0.5s ease-out forwards;
+}
+
+#tutor-introduction ul li:nth-child(1) {
+    animation-delay: 1.2s;
+}
+
+#tutor-introduction ul li:nth-child(2) {
+    animation-delay: 1.4s;
+}
+
+#tutor-introduction ul li:nth-child(3) {
+    animation-delay: 1.6s;
+}
+
+/* Code Elements with Hover Pulse Effect */
+#tutor-introduction code {
+    background-color: #e0f7fa;
+    color: #d6336c;
+    padding: 3px 5px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#tutor-introduction code:hover {
+    background-color: #1195a7;
+    transform: scale(1.05);
+}
+
+#docs {
+    text-align: center;
+    text-decoration-line: none;
+}
+#docs:hover {
+    animation: shake2 500ms;
+}
+/* Container styling to center the content */
+#container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/* Styling for the link to make it look like a button */
+#docs {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 16px;
+    text-decoration: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#docs:hover {
+    background-color: #0056b3;
+}
+#docs::after {
+    content: '★';
+    position: absolute;
+    top: -10px;
+    left: 75%;
+    transform: translateX(-50%) scale(0.5) rotate(0deg);
+    font-size: 30px;
+    color: gold;
+    opacity: 0;
+    pointer-events: none;
+}
+#docs:hover::after {
+    animation: star-animation 500ms ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        transform: translateY(7px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInFromLeft {
+    from {
+        transform: translateX(-7%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        transform: translateY(7px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes bounceIn {
+    0% {
+        transform: translateX(-10px);
+        opacity: 0;
+    }
+    60% {
+        transform: translateX(2px);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes shake {
+    0% { rotate: 0deg; }
+    30% { rotate: 17deg; }
+    60% { rotate: -17deg; }
+    100% { rotate: 0deg; }
+}
+
+@keyframes shake2 {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+}
+
+@keyframes star-animation {
+    0% {
+        opacity: 0;
+        transform: scale(0.5) rotate(0deg);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.2) rotate(20deg);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.5) rotate(40deg);
+    }
+}
+
+#tutor-announcements {
+    margin-top: 30px;
+    background-color: #c8e2f7;
+    padding: 30px;
+    border-radius: 8px;
+}
+
+#tutor-announcements h3 {
+    text-align: center;
+    font-weight: bold;
+    color: #1976d2;
+}
+
+#tutor-announcements label {
+    color: #e43c36;
+}
+
+#tutor-announcements hr {
+    color: black;
+}
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+    #tutor-announcements {
+        max-width: 90%;
+    }
+}
+@media screen and (min-width: 1200px) {
+    #tutor-announcements {
+        max-width: 50%;
+    }
+}
+
