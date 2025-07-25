@@ -11,6 +11,7 @@ npm run dev
 ```
 
 ```
+npm list vite
 npm install bootstrap
 npm install sweetalert2
 npm install --save-dev @types/node
@@ -22,4 +23,7 @@ npm install -g gh-pages
 npm install pinia
 npm install vue-tsc@1.8.24 --save-dev
 npm install typescript@5.3.3 --save-dev
+npm install -D @vue/tsconfig
+npm install -D @vitejs/plugin-vue @vitejs/plugin-vue-jsx
+npm install -D @vitejs/plugin-vue @vitejs/plugin-vue-jsx vite
 ```

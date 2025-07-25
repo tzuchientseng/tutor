@@ -18,13 +18,13 @@ const handleLogout = () => {
   <StyledBackground>
     <StyledCardContainer>
       <template v-if="isAuthenticated">
-        <h2>Welcome!</h2>
-        <h3>You are logged in.</h3>
+        <h2>歡迎!</h2>
+        <h3>已登入</h3>
         <button class="logout-button" @click="handleLogout">Logout</button>
       </template>
       <template v-else>
-        <h2>Login</h2>
-        <h3>Enter your credentials</h3>
+        <h2>歡迎登入!</h2>
+        <h3>請填寫帳號密碼</h3>
         <LoginForm @login-success="isAuthenticated = true" />
       </template>
     </StyledCardContainer>

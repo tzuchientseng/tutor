@@ -18,12 +18,18 @@ import NavBar from '../components/auth/NavBar.vue'
 
 <style scoped>
 #BannerWrapper {
-  width: 100vw;
   height: 70px;
+  border-radius: 12px;
   background-color: #008080;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 7px;
+  box-sizing: border-box;
+  /* ✅ padding 和 border 會包含在 width/height 裡
+     ❌ margin 不包含在 box-sizing 的計算中
+     📌 預設是 content-box（padding 和 border 不包含在寬高中）*/
+  width: calc(100% - 20px); /* 預留 margin 左右空間 */
 }
 
 .title {

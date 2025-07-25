@@ -41,18 +41,18 @@ async function handleSubmit() {
 
 <template>
   <form id="login-form" @submit.prevent="handleSubmit">
-    <input type="text" v-model="username" placeholder="Username" required />
-    <input type="password" v-model="password" placeholder="Password" required />
+    <input type="text" v-model="username" placeholder="帳號" required />
+    <input type="password" v-model="password" placeholder="密碼" required />
 
     <label>
       <span class="custom-checkbox-wrapper">
         <input type="checkbox" v-model="stayLoggedIn" />
         <span class="custom-checkbox"></span>
       </span>
-      <span class="custom-checkbox-text">Stay logged in</span>
+      <span class="custom-checkbox-text">保持登入</span>
     </label>
 
-    <button type="submit">Login</button>
+    <button type="submit">登入</button>
   </form>
 </template>
 
