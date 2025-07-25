@@ -5,7 +5,7 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import vueDevTools from 'vite-plugin-vue-devtools'
 
 export default defineConfig({
-  base: '/tutor/',
+  base: './',
   plugins: [vue(), vueJsx(), vueDevTools()],
   resolve: {
     alias: { '@': new URL('./src', import.meta.url).pathname }

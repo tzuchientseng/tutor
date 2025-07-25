@@ -8,7 +8,7 @@
     "build": "vite build",
     "type-check": "vue-tsc",
     "preview": "vite preview",
-    "deploy": "npm run build && gh-pages -d dist"
+    "deploy": "npm run build && gh-pages -d dist --nojekyll"
   },
   "dependencies": {
     "bootstrap": "^5.3.7",
