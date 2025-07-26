@@ -246,8 +246,9 @@ document.querySelectorAll('.copy-btn').forEach(button => {
   <div class="education-summary">
     <h2>👋 更多課程</h2>
     <ul>
-      <li><strong>吉他課程</strong> - 課程規劃中...</li>
-      <li><strong>魔術課程</strong> - 課程規劃中...</li>
+      <li><strong>XX課程</strong> - 課程規劃中...</li>
+      <!-- <li><strong>吉他課程</strong> - 課程規劃中...</li> -->
+      <!-- <li><strong>魔術課程</strong> - 課程規劃中...</li> -->
     </ul>
   </div>
 </template>
