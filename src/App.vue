@@ -2,7 +2,6 @@
 import { ref, onMounted } from 'vue'
 import { RouterView } from 'vue-router'
 
-// 狀態控制
 const showIntro = ref(true)
 const showMain = ref(false)
 const displayedText = ref('')
@@ -13,26 +12,36 @@ const showAuthor = ref(false)
 const greet = "學習的最佳夥伴 !"
 
 onMounted(() => {
-  let index = 0
-  const interval = setInterval(() => {
-    displayedText.value = greet.slice(0, index + 1)
-    index++
-    if (index >= greet.length) {
-      clearInterval(interval)
-      showAuthor.value = true
+  const hasSeenIntro = sessionStorage.getItem('hasSeenIntro')
 
-      setTimeout(() => {
-        fadeOut.value = true
+  if (hasSeenIntro) {
+    showIntro.value = false
+    showMain.value = true
+    fadeIn.value = true
+  } else {
+    let index = 0
+    const interval = setInterval(() => {
+      displayedText.value = greet.slice(0, index + 1)
+      index++
+      if (index >= greet.length) {
+        clearInterval(interval)
+        showAuthor.value = true
+
         setTimeout(() => {
-          showIntro.value = false
-          showMain.value = true
+          fadeOut.value = true
           setTimeout(() => {
-            fadeIn.value = true
-          }, 100)
-        }, 1200)
-      }, 1000)
-    }
-  }, 70)
+            showIntro.value = false
+            showMain.value = true
+            setTimeout(() => {
+              fadeIn.value = true
+            }, 100)
+          }, 1200)
+        }, 1000)
+      }
+    }, 70)
+
+    sessionStorage.setItem('hasSeenIntro', 'true')
+  }
 
   // 預加載頁面組件資源
   import('./views/MainView.vue')
@@ -85,7 +94,6 @@ onMounted(() => {
   animation: fadeInAnim 1.2s forwards;
 }
 
-/* 作者小字：一開始透明不顯示 */
 .author-text {
   margin-top: 1rem;
   font-size: 1rem;
@@ -96,7 +104,6 @@ onMounted(() => {
   transform: translateY(10px);
 }
 
-/* 顯示動畫 */
 .author-visible {
   opacity: 1;
   visibility: visible;

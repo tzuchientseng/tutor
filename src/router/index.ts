@@ -42,6 +42,16 @@ const router = createRouter({
       name: 'auth',
       component: Login,
     },
+    {
+      path: '/booking',
+      name: 'Booking',
+      component: Login,
+    },
+    {
+      path: '/courses',
+      name: 'CourseIntro',
+      component: MainView,
+    }
   ],
 })
 
