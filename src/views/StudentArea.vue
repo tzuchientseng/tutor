@@ -1,12 +1,10 @@
 <script setup lang="ts">
+import HamburgerNav from '../components/HamburgerButton.vue'
 </script>
 
 <template>
   <!-- 導覽列區塊 -->
-  <nav class="nav-links" @click="handle">
-    <RouterLink to="/">首頁</RouterLink>
-    <RouterLink to="/login">登入</RouterLink>
-  </nav>
+  <HamburgerNav />
 
   <!-- 學生專區區塊 -->
   <section class="main-content student-section">
