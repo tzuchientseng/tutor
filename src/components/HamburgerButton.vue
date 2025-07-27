@@ -40,8 +40,9 @@ onBeforeUnmount(() => {
     <!-- 導覽連結 -->
     <ul v-if="isOpen || isDesktop" class="nav-links">
       <li><RouterLink to="/">首頁</RouterLink></li>
-      <li><RouterLink to="/about">關於</RouterLink></li>
-      <li><RouterLink to="/contact">聯絡</RouterLink></li>
+      <li><RouterLink to="/login">帳號登入</RouterLink></li>
+      <li><RouterLink :to="{ name: 'Booking' }">預約上課時段</RouterLink></li>
+      <li><RouterLink :to="{ name: 'CourseIntro' }">課程介紹</RouterLink></li>
     </ul>
   </nav>
 </template>
@@ -60,7 +61,7 @@ onBeforeUnmount(() => {
 /* 漢堡按鈕 */
 .menu-icon {
   width: 40px;
-  height: 40px;
+  height: 30px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -71,7 +72,7 @@ onBeforeUnmount(() => {
 }
 
 .bar {
-  width: 40px;
+  width: 34px;
   height: 5px;
   background-color: #333;
   border-radius: 5px;
@@ -79,7 +80,7 @@ onBeforeUnmount(() => {
 }
 
 .menu-icon.active .top {
-  transform: translateY(17px) rotate(45deg);
+  transform: translateY(7px) rotate(45deg);
 }
 
 .menu-icon.active .middle {
@@ -161,4 +162,3 @@ onBeforeUnmount(() => {
   }
 }
 </style>
-

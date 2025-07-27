@@ -7,6 +7,8 @@
 //     { path: '/signup', name: 'signup', component: () => import('../views/SignUp.vue') },
 //     { path: '/student-area', name: 'StudentArea', component: () => import('../views/StudentArea.vue') },
 //     { path: '/login', name: 'auth', component: () => import('../views/LoginView.vue') },
+//     { path: '/booking', name: 'Booking', component: () => import('../views/LoginView.vue') },
+//     { path: '/courses', name: 'CourseIntro', component: () => import('../views/MainView.vue') },
 //   ]
 // })
 // export default router
@@ -42,6 +44,16 @@ const router = createRouter({
       name: 'auth',
       component: Login,
     },
+    {
+      path: '/booking',
+      name: 'Booking',
+      component: Login,
+    },
+    {
+      path: '/courses',
+      name: 'CourseIntro',
+      component: MainView,
+    }
   ],
 })
 
