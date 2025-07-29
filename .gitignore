@@ -1,3 +1,6 @@
+# 不 push lock file，避免跨平台安裝出錯
+package-lock.json           
+
 # Logs
 logs
 *.log
