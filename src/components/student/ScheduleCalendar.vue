@@ -1,27 +1,3 @@
-<template>
-  <div class="calendar-container">
-    <div class="calendar-header">
-      <button @click="prevMonth">‹</button>
-      <h2>{{ currentYear }} 年 {{ currentMonth + 1 }} 月</h2>
-      <button @click="nextMonth">›</button>
-    </div>
-
-    <div class="calendar-grid">
-      <div class="day-name" v-for="day in weekDays" :key="day">{{ day }}</div>
-      <div
-        class="day-cell"
-        v-for="(day, index) in daysInMonth"
-        :key="index"
-        :class="{ today: isToday(day) }"
-        @click="day && selectDate(day)"
-      >
-        <span v-if="day">{{ day.getDate() }}</span>
-        <span v-else>&nbsp;</span>
-      </div>
-    </div>
-  </div>
-</template>
-
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 
@@ -87,6 +63,30 @@ const selectDate = (day: Date) => {
   alert(`Day：${day.toLocaleDateString()}`)
 }
 </script>
+
+<template>
+  <div class="calendar-container">
+    <div class="calendar-header">
+      <button @click="prevMonth">‹</button>
+      <h2>{{ currentYear }} 年 {{ currentMonth + 1 }} 月</h2>
+      <button @click="nextMonth">›</button>
+    </div>
+
+    <div class="calendar-grid">
+      <div class="day-name" v-for="day in weekDays" :key="day">{{ day }}</div>
+      <div
+        class="day-cell"
+        v-for="(day, index) in daysInMonth"
+        :key="index"
+        :class="{ today: isToday(day) }"
+        @click="day && selectDate(day)"
+      >
+        <span v-if="day">{{ day.getDate() }}</span>
+        <span v-else>&nbsp;</span>
+      </div>
+    </div>
+  </div>
+</template>
 
 <style scoped>
 .calendar-container {

@@ -46,15 +46,15 @@ const router = createRouter({
       component: Login,
     },
     {
+      path: '/student-progress',
+      name: 'StudentProgress',
+      component: StudentProgress,
+    },
+    {
       path: '/courses',
       name: 'CourseIntro',
       component: MainView,
     },
-    {
-      path: '/student-progress',
-      name: 'StudentProgress',
-      component: StudentProgress,
-    }
   ],
 })
 
