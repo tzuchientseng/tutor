@@ -1,21 +1,18 @@
 <script setup lang="ts">
 import HamburgerNav from '../components/HamburgerButton.vue'
+import ScheduleCalendar from '../components/student/ScheduleCalendar.vue'
 </script>
 
 <template>
   <!-- 導覽列區塊 -->
   <HamburgerNav />
 
-  <!-- 學生專區區塊 -->
-  <section class="main-content student-section">
+  <!-- 時間預約時段區塊 -->
+  <section class="main-content schedule-section">
     <div id="BannerWrapper">
-      <h1 class="title">學生專區</h1>
+      <h1 class="title">預約時段</h1>
     </div>
-  </section>
-
-  <!-- 老師時段區塊 -->
-  <section class="main-content teacher-section">
-    <h1 class="title">老師時段</h1>
+    <ScheduleCalendar />
   </section>
 </template>
 
@@ -48,8 +45,8 @@ import HamburgerNav from '../components/HamburgerButton.vue'
   box-sizing: border-box;
 }
 
-/* 學生專區樣式 */
-.student-section {
+/* 時間預約時段樣式 */
+.schedule-section {
   background-color: #0e2a38;
   min-height: calc(50vh - 35px);
 }
@@ -63,13 +60,6 @@ import HamburgerNav from '../components/HamburgerButton.vue'
   justify-content: center;
   margin: 7px;
   width: calc(100% - 20px);
-}
-
-/* 老師時段樣式 */
-.teacher-section {
-  background-color: #1a3c4d;
-  min-height: calc(50vh - 35px);
-  width: 100%;
 }
 
 .title {
