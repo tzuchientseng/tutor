@@ -7,7 +7,7 @@
 //     { path: '/signup', name: 'signup', component: () => import('../views/SignUp.vue') },
 //     { path: '/student-area', name: 'StudentArea', component: () => import('../views/StudentArea.vue') },
 //     { path: '/login', name: 'auth', component: () => import('../views/LoginView.vue') },
-//     { path: '/booking', name: 'Booking', component: () => import('../views/LoginView.vue') },
+//     { path: '/student-progress', name: 'StudentProgress', component: () => import('../views/LoginView.vue') },
 //     { path: '/courses', name: 'CourseIntro', component: () => import('../views/MainView.vue') },
 //   ]
 // })
@@ -18,6 +18,7 @@ import MainView from '../views/MainView.vue'
 import SignUp from '../views/SignUp.vue'
 import StudentArea from '../views/StudentArea.vue'
 import Login from '../views/LoginView.vue'
+import StudentProgress from '../views/LoginView.vue'
 
 // import { useAuthStore } from '@/stores/useAuthStore'
 
@@ -45,14 +46,14 @@ const router = createRouter({
       component: Login,
     },
     {
-      path: '/booking',
-      name: 'Booking',
-      component: Login,
-    },
-    {
       path: '/courses',
       name: 'CourseIntro',
       component: MainView,
+    },
+    {
+      path: '/student-progress',
+      name: 'StudentProgress',
+      component: StudentProgress,
     }
   ],
 })

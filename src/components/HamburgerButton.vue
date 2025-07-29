@@ -41,7 +41,6 @@ onBeforeUnmount(() => {
     <ul v-if="isOpen || isDesktop" class="nav-links">
       <li><RouterLink to="/">首頁</RouterLink></li>
       <li><RouterLink to="/login">帳號登入</RouterLink></li>
-      <li><RouterLink :to="{ name: 'Booking' }">預約上課時段</RouterLink></li>
       <li><RouterLink :to="{ name: 'CourseIntro' }">課程介紹</RouterLink></li>
     </ul>
   </nav>
@@ -162,3 +161,4 @@ onBeforeUnmount(() => {
   }
 }
 </style>
+
