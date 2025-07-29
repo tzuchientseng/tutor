@@ -15,9 +15,11 @@ const goToSignup = () => {
 
 const goToStudentArea = () => {
   if (import.meta.env.DEV) {
-    window.open(`${import.meta.env.BASE_URL}student-area`, '_blank')
+    // window.open(`${import.meta.env.BASE_URL}student-area`, '_blank')
+    router.push('/student-area');
   } else {
-    window.open(`${import.meta.env.BASE_URL}#/student-area`, '_blank')
+    // window.open(`${import.meta.env.BASE_URL}#/student-area`, '_blank')
+    window.location.href = `${import.meta.env.BASE_URL}#/student-area`
   }
 }
 
