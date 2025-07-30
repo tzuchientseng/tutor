@@ -1,24 +1,7 @@
-/*
-{
-  "account": "0912345678",
-  "password": "yourpassword"
-}
-{
-  "refresh": "....",
-  "access": "....",
-  "user": {
-    "id": 1,
-    "account": "0912345678",
-    "email": "example@gmail.com",
-    "name": "Sunny"
-  }
-}
-*/
+import { defineStore } from 'pinia'
 
 // const API_URL = 'https://home.sunnytseng.com/api/tutor' // `npm run deploy`
 const API_URL = 'api/tutor/'
-
-import { defineStore } from 'pinia'
 
 export interface SignUpForm {
   name: string
