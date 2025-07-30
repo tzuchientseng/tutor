@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
-import { useCalendarStore } from '../../stores/CalendarStore'
+import { useCalendarStore } from '../../stores/calendarStore'
 
 const calendarStore = useCalendarStore()
 
