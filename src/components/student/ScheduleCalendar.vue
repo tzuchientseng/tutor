@@ -1,32 +1,35 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
+import { useCalendarStore } from '../../stores/CalendarStore'
 
-// 今天的日期
+const calendarStore = useCalendarStore()
+
+onMounted(() => {
+  calendarStore.loadEvents()
+})
+
 const today: Date = new Date()
 const currentDate = ref<Date>(new Date())
 
-// 年與月
 const currentYear = computed(() => currentDate.value.getFullYear())
 const currentMonth = computed(() => currentDate.value.getMonth())
 
-// 星期名稱
 const weekDays: string[] = ['日', '一', '二', '三', '四', '五', '六']
 
-// 每月日期格子陣列（含 null 占位）
+// 工具函式：將 Date 格式化為 YYYY-MM-DD
+const formatDate = (date: Date): string => {
+  return `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`
+}
+
+// 取得當月所有日期（含空格）
 const daysInMonth = computed<(Date | null)[]>(() => {
   const year = currentYear.value
   const month = currentMonth.value
   const firstDay = new Date(year, month, 1)
   const lastDay = new Date(year, month + 1, 0)
-
   const days: (Date | null)[] = []
 
-  // 加入空格（第一天前的占位）
-  for (let i = 0; i < firstDay.getDay(); i++) {
-    days.push(null)
-  }
-
-  // 加入每一天
+  for (let i = 0; i < firstDay.getDay(); i++) days.push(null)
   for (let i = 1; i <= lastDay.getDate(); i++) {
     days.push(new Date(year, month, i))
   }
@@ -34,7 +37,6 @@ const daysInMonth = computed<(Date | null)[]>(() => {
   return days
 })
 
-// 判斷是否為今天
 const isToday = (day: Date | null): boolean => {
   if (!day) return false
   return (
@@ -44,23 +46,42 @@ const isToday = (day: Date | null): boolean => {
   )
 }
 
-// 上一個月
+// 判斷該天是否有事件
+const hasEvent = (day: Date | null): boolean => {
+  if (!day) return false
+  const dateStr = formatDate(day)
+  return calendarStore.getEventByDate(dateStr).length > 0
+}
+
+// 上個月
 const prevMonth = (): void => {
   const newDate = new Date(currentDate.value)
   newDate.setMonth(newDate.getMonth() - 1)
   currentDate.value = newDate
 }
 
-// 下一個月
+// 下個月
 const nextMonth = (): void => {
   const newDate = new Date(currentDate.value)
   newDate.setMonth(newDate.getMonth() + 1)
   currentDate.value = newDate
 }
 
-// 點選日期
+// 點選日期時的事件彈窗
 const selectDate = (day: Date) => {
-  alert(`Day：${day.toLocaleDateString()}`)
+  const dateStr = formatDate(day)
+  const events = calendarStore.getEventByDate(dateStr)
+  if (events.length === 0) {
+    alert(`${dateStr} 沒有排定事件`)
+  } else {
+    const message = events
+      .map(e => {
+        const time = new Date(e.datetime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        return `📘 ${e.title} @ ${time}`
+      })
+      .join('\n')
+    alert(`${dateStr} 有 ${events.length} 筆事件：\n${message}`)
+  }
 }
 </script>
 
@@ -73,6 +94,7 @@ const selectDate = (day: Date) => {
     </div>
 
     <div class="calendar-grid">
+
       <div class="day-name" v-for="day in weekDays" :key="day">{{ day }}</div>
       <div
         class="day-cell"
@@ -81,7 +103,11 @@ const selectDate = (day: Date) => {
         :class="{ today: isToday(day) }"
         @click="day && selectDate(day)"
       >
-        <span v-if="day">{{ day.getDate() }}</span>
+        <span v-if="day">
+          {{ day.getDate() }}
+          <!-- <span v-if="hasEvent(day)">✅/span> -->
+          <span v-if="hasEvent(day)">☑️</span>
+        </span>
         <span v-else>&nbsp;</span>
       </div>
     </div>
@@ -187,4 +213,3 @@ const selectDate = (day: Date) => {
   }
 }
 </style>
-
