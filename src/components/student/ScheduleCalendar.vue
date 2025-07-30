@@ -94,8 +94,8 @@ const selectDate = (day: Date) => {
     </div>
 
     <div class="calendar-grid">
-
       <div class="day-name" v-for="day in weekDays" :key="day">{{ day }}</div>
+
       <div
         class="day-cell"
         v-for="(day, index) in daysInMonth"
@@ -103,12 +103,11 @@ const selectDate = (day: Date) => {
         :class="{ today: isToday(day) }"
         @click="day && selectDate(day)"
       >
-        <span v-if="day">
-          {{ day.getDate() }}
-          <!-- <span v-if="hasEvent(day)">✅/span> -->
-          <span v-if="hasEvent(day)">☑️</span>
-        </span>
-        <span v-else>&nbsp;</span>
+        <div v-if="day">
+          <div>{{ day.getDate() }}</div>
+          <div v-if="hasEvent(day)">☑️</div>
+        </div>
+        <div v-else>&nbsp;</div>
       </div>
     </div>
   </div>
@@ -169,15 +168,22 @@ const selectDate = (day: Date) => {
 }
 
 .day-cell {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   height: 70px;
-  text-align: center;
-  line-height: 70px;
   background-color: #eaf4f4;
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.2s ease;
   font-weight: bold;
   color: #333;
+  padding: 4px 0;
+}
+
+.day-cell div {
+  line-height: 1.2;
 }
 
 .day-cell:hover {
@@ -203,9 +209,8 @@ const selectDate = (day: Date) => {
   }
 
   .day-cell {
-    height: 50px;
-    line-height: 50px;
-    font-size: 0.9rem;
+    height: 40px;
+    font-size: 0.7rem;
   }
 
   .day-name {
@@ -213,3 +218,4 @@ const selectDate = (day: Date) => {
   }
 }
 </style>
+
