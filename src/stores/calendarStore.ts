@@ -1,6 +1,9 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
 
+// const API_URL = 'https://home.sunnytseng.com/api/tutor/calendar/' // `npm run deploy`
+const API_URL = 'api/tutor/calendar/'
+
 export interface CalendarEvent {
   title: string
   student_name: string
@@ -27,87 +30,17 @@ export const useCalendarStore = defineStore('calendar', () => {
     })
   }
 
-  /** 假資料載入（未來可改為 API 載入） */
+  /** 從 API 載入事件資料 */
   const loadEvents = async () => {
-    events.value = [
-      {
-        title: 'Work Shift',
-        student_name: 'Sunny',
-        datetime: '2025-08-06T13:00:00+08:00',
-        description: 'Worked 6 hours',
-        place: 'Office'
-      },
-      {
-        title: 'Work Shift',
-        student_name: 'Sunny',
-        datetime: '2025-08-12T13:00:00+08:00',
-        description: 'Worked 5 hours',
-        place: 'Office'
-      },
-      {
-        title: 'Work Shift',
-        student_name: 'Sunny',
-        datetime: '2025-08-13T13:00:00+08:00',
-        description: 'Worked 6 hours',
-        place: 'Office'
-      },
-      {
-        title: 'Work Shift',
-        student_name: 'Sunny',
-        datetime: '2025-08-16T14:00:00+08:00',
-        description: 'Worked 7.5 hours',
-        place: 'Office'
-      },
-      {
-        title: 'Work Shift',
-        student_name: 'Sunny',
-        datetime: '2025-08-19T11:00:00+08:00',
-        description: 'Worked 6 hours',
-        place: 'Office'
-      },
-      {
-        title: 'Math Lesson',
-        student_name: 'Sunny',
-        datetime: '2025-08-20T14:00:00+08:00',
-        description: 'Chapter 5',
-        place: 'Room A'
-      },
-      {
-        title: 'Work Shift',
-        student_name: 'Sunny',
-        datetime: '2025-08-20T13:00:00+08:00',
-        description: 'Worked 6 hours',
-        place: 'Office'
-      },
-      {
-        title: 'Work Shift',
-        student_name: 'Sunny',
-        datetime: '2025-08-23T14:00:00+08:00',
-        description: 'Worked 7.5 hours',
-        place: 'Office'
-      },
-      {
-        title: 'Work Shift',
-        student_name: 'Sunny',
-        datetime: '2025-08-26T13:00:00+08:00',
-        description: 'Worked 5 hours',
-        place: 'Office'
-      },
-      {
-        title: 'Work Shift',
-        student_name: 'Sunny',
-        datetime: '2025-08-27T13:00:00+08:00',
-        description: 'Worked 6 hours',
-        place: 'Office'
-      },
-      {
-        title: 'Work Shift',
-        student_name: 'Sunny',
-        datetime: '2025-08-30T14:00:00+08:00',
-        description: 'Worked 7.5 hours',
-        place: 'Office'
-      }
-    ]
+    try {
+      const response = await fetch(API_URL)
+      if (!response.ok) throw new Error('Failed to load event data')
+
+      const data = await response.json()
+      events.value = data as CalendarEvent[]
+    } catch (error) {
+      console.error('An error occurred while loading calendar events:', error)
+    }
   }
 
   return {
