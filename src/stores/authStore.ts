@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 
 // const API_URL = 'https://home.sunnytseng.com/api/tutor/users' // `npm run deploy`
-const API_URL = 'api/tutor/users';
+const API_URL = 'api/tutor/users/'
 
 interface User {
   name: string;
@@ -30,37 +30,44 @@ export const useAuthStore = defineStore('auth', {
   },
 
   actions: {
-    async login(account: string, password: string) {
+    async login(account: string, password: string, remember = false) {
       try {
         const response = await fetch(`${API_URL}/token/`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({
-            username: account,
-            password: password
-          }),
+          body: JSON.stringify({ account, password }),
         });
-
-        if (!response.ok) throw new Error('Login failed');
 
         const data = await response.json();
 
+        if (!response.ok) {
+          const detail = data.detail || 'Login failed';
+          if (detail.includes('not found')) {
+            throw new Error('Account does not exist');
+          } else if (detail.includes('disabled') || detail.includes('inactive')) {
+            throw new Error('Account is not active');
+          } else if (detail.includes('password')) {
+            throw new Error('Incorrect password');
+          } else {
+            throw new Error(detail);
+          }
+        }
+
         const user: User = {
-          name: data.name,
-          account: data.account,
+          name: data.user.name,
+          account: data.user.account,
           token: data.access,
         };
 
-        this.setUser(user);
+        this.setUser(user, remember);
         return { success: true };
       } catch (error) {
         if (error instanceof Error) {
           console.error('Login error:', error.message);
           return { success: false, message: error.message };
         } else {
-          console.error('Unknown error:', error);
           return { success: false, message: 'An unknown error occurred' };
         }
       }
@@ -98,11 +105,13 @@ export const useAuthStore = defineStore('auth', {
       }
     },
 
-    setUser(user: User) {
+    setUser(user: User, remember = false) {
       this.user = user;
       this.token = user.token;
-      sessionStorage.setItem('user', JSON.stringify(user));
-      sessionStorage.setItem('token', user.token || '');
+
+      const storage = remember ? localStorage : sessionStorage;
+      storage.setItem('user', JSON.stringify(user));
+      storage.setItem('token', user.token || '');
     },
 
     logout() {
@@ -110,6 +119,9 @@ export const useAuthStore = defineStore('auth', {
       this.token = null;
       sessionStorage.removeItem('user');
       sessionStorage.removeItem('token');
+      localStorage.removeItem('user');
+      localStorage.removeItem('token');
     }
   }
 });
+

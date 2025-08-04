@@ -2,13 +2,16 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import Swal from 'sweetalert2'
+import { useAuthStore } from '../../stores/authStore.ts'
 
 const emit = defineEmits(['login-success'])
 
 const username = ref('')
 const password = ref('')
 const stayLoggedIn = ref(false)
+
 const router = useRouter()
+const auth = useAuthStore()
 
 async function handleSubmit() {
   Swal.fire({
@@ -19,18 +22,24 @@ async function handleSubmit() {
     willOpen: () => Swal.showLoading(),
   })
 
-  // Simulate login API
-  const success = username.value === 'admin' && password.value === 'admin'
+  const result = await auth.login(username.value, password.value, stayLoggedIn.value)
 
   Swal.close()
 
-  if (success) {
-    emit('login-success')
-    router.push('/')
+  if (result.success) {
+    Swal.fire({
+      title: 'Success',
+      text: 'Login successful!',
+      icon: 'success',
+      confirmButtonColor: '#3085d6',
+    }).then(() => {
+      emit('login-success')
+      router.push('/')
+    })
   } else {
     Swal.fire({
-      title: 'ERROR',
-      text: 'Login Failed!',
+      title: 'Login Failed',
+      text: result.message,
       icon: 'warning',
       confirmButtonText: 'OK',
       confirmButtonColor: '#3085d6',
