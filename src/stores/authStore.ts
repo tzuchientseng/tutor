@@ -30,25 +30,20 @@ export const useAuthStore = defineStore('auth', {
   },
 
   actions: {
-    async login(account: string, password: string) {
+    async login(account: string, password: string, remember = false) {
       try {
         const response = await fetch(`${API_URL}/token/`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({
-            account: account,
-            password: password
-          }),
+          body: JSON.stringify({ account, password }),
         });
 
         const data = await response.json();
 
         if (!response.ok) {
           const detail = data.detail || 'Login failed';
-
-          // 🔒 客製錯誤訊息
           if (detail.includes('not found')) {
             throw new Error('Account does not exist');
           } else if (detail.includes('disabled') || detail.includes('inactive')) {
@@ -66,14 +61,13 @@ export const useAuthStore = defineStore('auth', {
           token: data.access,
         };
 
-        this.setUser(user);
+        this.setUser(user, remember); // ⬅ 傳入記憶登入參數
         return { success: true };
       } catch (error) {
         if (error instanceof Error) {
           console.error('Login error:', error.message);
           return { success: false, message: error.message };
         } else {
-          console.error('Unknown error:', error);
           return { success: false, message: 'An unknown error occurred' };
         }
       }
@@ -111,11 +105,13 @@ export const useAuthStore = defineStore('auth', {
       }
     },
 
-    setUser(user: User) {
+    setUser(user: User, remember = false) {
       this.user = user;
       this.token = user.token;
-      sessionStorage.setItem('user', JSON.stringify(user));
-      sessionStorage.setItem('token', user.token || '');
+
+      const storage = remember ? localStorage : sessionStorage;
+      storage.setItem('user', JSON.stringify(user));
+      storage.setItem('token', user.token || '');
     },
 
     logout() {
@@ -123,6 +119,8 @@ export const useAuthStore = defineStore('auth', {
       this.token = null;
       sessionStorage.removeItem('user');
       sessionStorage.removeItem('token');
+      localStorage.removeItem('user');
+      localStorage.removeItem('token');
     }
   }
 });
