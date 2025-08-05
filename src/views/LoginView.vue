@@ -1,20 +1,31 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import LoginForm from '../components/auth/LoginForm.vue'
+import RegisterModal from '../components/auth/RegisterModal.vue'
 import StyledBackground from '../components/auth/StyledBackground.vue'
 import StyledCardContainer from '../components/auth/StyledCardContainer.vue'
-import { useAuthStore } from '../stores/authStore.ts'
+import { useAuthStore } from '../stores/authStore'
 
 const router = useRouter()
 const auth = useAuthStore()
 
-const isAuthenticated = computed(() => auth.isAuthenticated)
-const userName = computed(() => auth.getUserName)
+const isAuthenticated = computed<boolean>(() => auth.isAuthenticated)
+const userName = computed<string>(() => auth.getUserName)
 
-const handleLogout = () => {
+const showRegisterModal = ref<boolean>(false)
+
+function handleLogout(): void {
   auth.logout()
   router.push('/')
+}
+
+function openRegisterModal(): void {
+  showRegisterModal.value = true
+}
+
+function closeRegisterModal(): void {
+  showRegisterModal.value = false
 }
 </script>
 
@@ -28,11 +39,22 @@ const handleLogout = () => {
         <h3>您已登入</h3>
         <button class="logout-button" @click="handleLogout">登出</button>
       </template>
-      <template v-else>
+
+      <!-- 只有在未登入 & 沒有開啟註冊視窗時才顯示登入 -->
+      <template v-else-if="!showRegisterModal">
         <h2>歡迎登入!</h2>
         <h3>請填寫帳號密碼</h3>
         <LoginForm />
+
+        <p class="text-center mt-3 p-1">
+          還沒有帳號？
+          <a href="#" class="register-link" @click.prevent="openRegisterModal">點此註冊</a>
+        </p>
       </template>
+
+      <!-- 註冊 Modal -->
+      <RegisterModal v-if="showRegisterModal" @cancel="closeRegisterModal" />
+
     </StyledCardContainer>
   </StyledBackground>
 </template>
@@ -67,6 +89,23 @@ h3 {
   margin: 0 0 48px;
   font-weight: 400;
   font-size: 16px;
+}
+
+.register-hint {
+  font-size: 1rem;
+  color: #555;
+}
+
+.register-link {
+  color: #0d6efd;
+  font-weight: 600;
+  text-decoration: underline;
+  transition: color 0.2s ease-in-out;
+}
+
+.register-link:hover {
+  color: #0a58ca;
+  text-decoration: none;
 }
 </style>
 
