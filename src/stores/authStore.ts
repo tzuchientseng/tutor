@@ -80,24 +80,26 @@ export const useAuthStore = defineStore('auth', {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({
-            name: name,
-            account: account,
-            password: password,
-            email: email,
-            phone: phone,
-          }),
+          body: JSON.stringify({ name, account, password, email, phone }),
         });
 
         if (!response.ok) {
           const errorData = await response.json();
-          throw new Error(errorData.detail || 'Registration failed');
+
+          // 將錯誤格式化成 HTML 清單
+          const message = Object.entries(errorData)
+            .map(
+              ([field, messages]) =>
+                `<li><strong>${field}</strong>: ${(messages as string[]).join(', ')}</li>`
+            )
+            .join('');
+
+          throw new Error(`<ul style="text-align:left;">${message}</ul>`);
         }
 
         return { success: true };
       } catch (error) {
         if (error instanceof Error) {
-          console.error('Registration error:', error.message);
           return { success: false, message: error.message };
         } else {
           return { success: false, message: 'An unknown error occurred' };
