@@ -3,9 +3,17 @@ import { ref, computed, onMounted } from 'vue'
 import { useCalendarStore } from '../../stores/calendarStore'
 
 const calendarStore = useCalendarStore()
+const loading = ref(true)
 
-onMounted(() => {
-  calendarStore.loadEvents()
+onMounted(async () => {
+  try {
+    await calendarStore.loadEvents()
+  } catch (error) {
+    console.error('Failed to load events:', error)
+    alert('Unable to load events, please try again later!')
+  } finally {
+    loading.value = false
+  }
 })
 
 const today: Date = new Date()
@@ -87,27 +95,34 @@ const selectDate = (day: Date) => {
 
 <template>
   <div class="calendar-container">
-    <div class="calendar-header">
-      <button @click="prevMonth">‹</button>
-      <h2>{{ currentYear }} 年 {{ currentMonth + 1 }} 月</h2>
-      <button @click="nextMonth">›</button>
+    <!-- Loading State -->
+    <div v-if="loading" class="loading-overlay">
+      <span class="loading-text">Loading...</span>
     </div>
+    <!-- Calendar Content -->
+    <div v-else>
+      <div class="calendar-header">
+        <button @click="prevMonth">‹</button>
+        <h2>{{ currentYear }} 年 {{ currentMonth + 1 }} 月</h2>
+        <button @click="nextMonth">›</button>
+      </div>
 
-    <div class="calendar-grid">
-      <div class="day-name" v-for="day in weekDays" :key="day">{{ day }}</div>
+      <div class="calendar-grid">
+        <div class="day-name" v-for="day in weekDays" :key="day">{{ day }}</div>
 
-      <div
-        class="day-cell"
-        v-for="(day, index) in daysInMonth"
-        :key="index"
-        :class="{ today: isToday(day) }"
-        @click="day && selectDate(day)"
-      >
-        <div v-if="day">
-          <div>{{ day.getDate() }}</div>
-          <div v-if="hasEvent(day)">☑️</div>
+        <div
+          class="day-cell"
+          v-for="(day, index) in daysInMonth"
+          :key="index"
+          :class="{ today: isToday(day) }"
+          @click="day && selectDate(day)"
+        >
+          <div v-if="day">
+            <div>{{ day.getDate() }}</div>
+            <div v-if="hasEvent(day)">☑️</div>
+          </div>
+          <div v-else>&nbsp;</div>
         </div>
-        <div v-else>&nbsp;</div>
       </div>
     </div>
   </div>
@@ -117,11 +132,13 @@ const selectDate = (day: Date) => {
 .calendar-container {
   width: 100%;
   padding: 1rem;
+  min-height: 400px;
   border-radius: 10px;
   background-color: #ffffff;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
   overflow-x: auto;
+  position: relative; /* For positioning the loading overlay */
 }
 
 .calendar-header {
@@ -197,6 +214,33 @@ const selectDate = (day: Date) => {
   box-shadow: 0 0 0 2px #388e3c inset;
 }
 
+/* Loading State Styles */
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.loading-text {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #008080;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.2); opacity: 0.7; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
 /* RWD（手機版） */
 @media (max-width: 768px) {
   .calendar-header h2 {
@@ -216,6 +260,9 @@ const selectDate = (day: Date) => {
   .day-name {
     font-size: 0.9rem;
   }
+
+  .loading-text {
+    font-size: 1.2rem;
+  }
 }
 </style>
-
