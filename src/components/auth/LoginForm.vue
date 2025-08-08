@@ -34,7 +34,7 @@ async function handleSubmit() {
       confirmButtonColor: '#3085d6',
     }).then(() => {
       emit('login-success')
-      router.push('/')
+      router.push('/student-area')
     })
   } else {
     Swal.fire({
