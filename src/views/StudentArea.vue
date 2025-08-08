@@ -1,6 +1,29 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import HamburgerNav from '../components/HamburgerButton.vue'
 import ScheduleCalendar from '../components/student/ScheduleCalendar.vue'
+import DailySchedule from '../components/student/DailySchedule.vue'
+
+const selectedDate = ref<Date | null>(null)
+
+// Handle date selection with toggle behavior
+const handleDateSelect = (date: Date) => {
+  // If the same date is clicked, toggle off (hide DailySchedule)
+  if (selectedDate.value && 
+      selectedDate.value.getFullYear() === date.getFullYear() &&
+      selectedDate.value.getMonth() === date.getMonth() &&
+      selectedDate.value.getDate() === date.getDate()) {
+    selectedDate.value = null
+  } else {
+    // Otherwise, switch to the new date
+    selectedDate.value = date
+  }
+}
+
+// Handle closing the daily schedule
+const closeSchedule = () => {
+  selectedDate.value = null
+}
 </script>
 
 <template>
@@ -12,7 +35,8 @@ import ScheduleCalendar from '../components/student/ScheduleCalendar.vue'
     <div id="BannerWrapper">
       <h1 class="title">預約時段</h1>
     </div>
-    <ScheduleCalendar />
+    <ScheduleCalendar @select-date="handleDateSelect" />
+    <DailySchedule v-if="selectedDate" :date="selectedDate" @close="closeSchedule" />
   </section>
 </template>
 

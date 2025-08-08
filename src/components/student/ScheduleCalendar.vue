@@ -5,6 +5,9 @@ import { useCalendarStore } from '../../stores/calendarStore'
 const calendarStore = useCalendarStore()
 const loading = ref(true)
 
+// Define emit for date selection
+const emit = defineEmits(['select-date'])
+
 onMounted(async () => {
   try {
     await calendarStore.loadEvents()
@@ -75,21 +78,9 @@ const nextMonth = (): void => {
   currentDate.value = newDate
 }
 
-// 點選日期時的事件彈窗
+// 點選日期時發送事件
 const selectDate = (day: Date) => {
-  const dateStr = formatDate(day)
-  const events = calendarStore.getEventByDate(dateStr)
-  if (events.length === 0) {
-    alert(`${dateStr} 沒有排定事件`)
-  } else {
-    const message = events
-      .map(e => {
-        const time = new Date(e.datetime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-        return `📘 ${e.title} @ ${time}`
-      })
-      .join('\n')
-    alert(`${dateStr} 有 ${events.length} 筆事件：\n${message}`)
-  }
+  emit('select-date', day)
 }
 </script>
 
@@ -138,7 +129,7 @@ const selectDate = (day: Date) => {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
   overflow-x: auto;
-  position: relative; /* For positioning the loading overlay */
+  position: relative;
 }
 
 .calendar-header {
@@ -266,3 +257,4 @@ const selectDate = (day: Date) => {
   }
 }
 </style>
+
