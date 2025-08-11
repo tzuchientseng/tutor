@@ -50,8 +50,8 @@ async function handleSubmit() {
 
 <template>
   <form id="login-form" @submit.prevent="handleSubmit">
-    <input type="text" v-model="username" placeholder="帳號" required />
-    <input type="password" v-model="password" placeholder="密碼" required />
+    <input type="text" v-model="username" placeholder="電話 (帳號)" required />
+    <input type="password" v-model="password" placeholder="姓名 (密碼)" required />
 
     <label>
       <span class="custom-checkbox-wrapper">

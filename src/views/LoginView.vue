@@ -53,7 +53,11 @@ function closeRegisterModal(): void {
       </template>
 
       <!-- 註冊 Modal -->
-      <RegisterModal v-if="showRegisterModal" @cancel="closeRegisterModal" />
+      <RegisterModal
+        v-if="showRegisterModal"
+        @cancel="closeRegisterModal"
+        @success="closeRegisterModal"
+      />
 
     </StyledCardContainer>
   </StyledBackground>
