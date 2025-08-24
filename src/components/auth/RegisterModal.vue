@@ -88,35 +88,84 @@ function handleCancel(): void {
 <template>
   <div class="form-wrapper">
     <h2 class="form-title">註冊帳號</h2>
-    <form @submit.prevent="handleRegister">
+    <form @submit.prevent="handleRegister" autocomplete="on">
       <div class="form-group">
         <label for="name">姓名</label>
-        <input id="name" v-model="name" type="text" placeholder="請輸入姓名" required />
+        <input
+          id="name"
+          v-model="name"
+          type="text"
+          placeholder="請輸入姓名"
+          autocomplete="name"
+          required
+        />
       </div>
 
       <div class="form-group">
         <label for="username">帳號</label>
-        <input id="username" v-model="username" type="text" placeholder="請輸入帳號" required />
+        <input
+          id="username"
+          v-model="username"
+          type="text"
+          placeholder="請輸入帳號"
+          autocomplete="username"
+          autocapitalize="off"
+          spellcheck="false"
+          required
+        />
       </div>
 
       <div class="form-group">
         <label for="email">Email</label>
-        <input id="email" v-model="email" type="email" placeholder="請輸入 Email" required />
+        <input
+          id="email"
+          v-model="email"
+          type="email"
+          placeholder="請輸入 Email"
+          autocomplete="email"
+          inputmode="email"
+          autocapitalize="off"
+          spellcheck="false"
+          required
+        />
       </div>
 
       <div class="form-group">
         <label for="phone">手機號碼</label>
-        <input id="phone" v-model="phone" type="tel" placeholder="請輸入手機號碼" required />
+        <input
+          id="phone"
+          v-model="phone"
+          type="tel"
+          placeholder="請輸入手機號碼"
+          autocomplete="tel"
+          inputmode="tel"
+          required
+        />
       </div>
 
       <div class="form-group">
         <label for="password">密碼</label>
-        <input id="password" v-model="password" type="password" placeholder="請輸入密碼" required />
+        <input
+          id="password"
+          v-model="password"
+          type="password"
+          placeholder="請輸入密碼"
+          autocomplete="new-password"
+          required
+        />
+        <!-- minlength="8" -->
       </div>
 
       <div class="form-group">
         <label for="confirmPassword">確認密碼</label>
-        <input id="confirmPassword" v-model="confirmPassword" type="password" placeholder="再次輸入密碼" required />
+        <input
+          id="confirmPassword"
+          v-model="confirmPassword"
+          type="password"
+          placeholder="再次輸入密碼"
+          autocomplete="new-password"
+          required
+        />
       </div>
 
       <button type="submit" :disabled="isLoading">

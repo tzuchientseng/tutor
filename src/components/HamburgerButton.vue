@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from 'vue'
+import UserMenu from '../components/auth/UserMenu.vue'
 
 const isOpen = ref(false)
 const isDesktop = ref(window.innerWidth >= 768)
@@ -39,11 +40,12 @@ onBeforeUnmount(() => {
 
     <!-- 導覽連結 -->
     <ul v-if="isOpen || isDesktop" class="nav-links">
-      <li><RouterLink to="/">首頁</RouterLink></li>
+      <li><RouterLink to="/student-area">首頁</RouterLink></li>
       <li><RouterLink to="/login">帳號登入</RouterLink></li>
       <li><RouterLink :to="{ name: 'StudentProgress' }">學習狀況</RouterLink></li>
       <li><RouterLink :to="{ name: 'CourseIntro' }">課程介紹</RouterLink></li>
     </ul>
+    <UserMenu />
   </nav>
 </template>
 
@@ -161,5 +163,5 @@ onBeforeUnmount(() => {
     padding: 0.75rem 1rem;
   }
 }
-</style>
+</style
 
