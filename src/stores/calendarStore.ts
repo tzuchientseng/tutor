@@ -2,8 +2,8 @@ import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import { useAuthStore } from './authStore.ts'
 
-// const API_URL = 'https://home.sunnytseng.com/api/tutor/calendar/' // 部署時用
-// const IMPORT_URL = 'https://home.sunnytseng.com/api/tutor/import-workhours/' // 部署時用
+// const API_URL = 'https://sunnytseng.com/api/tutor/calendar/' // 部署時用
+// const IMPORT_URL = 'https://sunnytseng.com/api/tutor/import-workhours/' // 部署時用
 const API_URL = 'api/tutor/calendar/'
 const IMPORT_URL = 'api/tutor/import-workhours/'
 

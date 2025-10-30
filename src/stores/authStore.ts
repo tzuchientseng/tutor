@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 
-// const API_URL = 'https://home.sunnytseng.com/api/tutor/users' // `npm run deploy`
+// const API_URL = 'https://sunnytseng.com/api/tutor/users' // `npm run deploy`
 const API_URL = 'api/tutor/users/'
 
 interface User {

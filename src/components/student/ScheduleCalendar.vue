@@ -1,68 +1,74 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
-import { useCalendarStore } from '../../stores/calendarStore'
+import { ref, computed, onMounted } from "vue";
+import { useCalendarStore } from "../../stores/calendarStore";
 
-const calendarStore = useCalendarStore()
-const loading = ref(true)
+const calendarStore = useCalendarStore();
+const loading = ref(true);
 
 // Define emit for date selection
-const emit = defineEmits(['select-date'])
+const emit = defineEmits(["select-date"]);
 
 onMounted(async () => {
   try {
-    await calendarStore.loadEvents()
+    await calendarStore.loadEvents();
   } catch (error) {
-    console.error('Failed to load events:', error)
-    alert('Unable to load events, please try again later!')
+    console.error("Failed to load events:", error);
+    alert("Unable to load events, please try again later!");
   } finally {
-    loading.value = false
+    loading.value = false;
   }
-})
+});
 
-const today: Date = new Date()
-const currentDate = ref<Date>(new Date())
+const today: Date = new Date();
+const currentDate = ref<Date>(new Date());
 
-const currentYear = computed(() => currentDate.value.getFullYear())
-const currentMonth = computed(() => currentDate.value.getMonth())
+const currentYear = computed(() => currentDate.value.getFullYear());
+const currentMonth = computed(() => currentDate.value.getMonth());
 
-const weekDays: string[] = ['日', '一', '二', '三', '四', '五', '六']
+const weekDays: string[] = ["日", "一", "二", "三", "四", "五", "六"];
 
 // 工具函式：將 Date 格式化為 YYYY-MM-DD
 const formatDate = (date: Date): string => {
-  return `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`
-}
+  return `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, "0")}-${date.getDate().toString().padStart(2, "0")}`;
+};
 
 // 取得當月所有日期（含空格）
 const daysInMonth = computed<(Date | null)[]>(() => {
-  const year = currentYear.value
-  const month = currentMonth.value
-  const firstDay = new Date(year, month, 1)
-  const lastDay = new Date(year, month + 1, 0)
-  const days: (Date | null)[] = []
+  const year = currentYear.value;
+  const month = currentMonth.value;
+  const firstDay = new Date(year, month, 1);
+  const lastDay = new Date(year, month + 1, 0);
+  const days: (Date | null)[] = [];
 
-  for (let i = 0; i < firstDay.getDay(); i++) days.push(null)
+  for (let i = 0; i < firstDay.getDay(); i++) days.push(null);
   for (let i = 1; i <= lastDay.getDate(); i++) {
-    days.push(new Date(year, month, i))
+    days.push(new Date(year, month, i));
   }
 
-  return days
-})
+  return days;
+});
 
 const isToday = (day: Date | null): boolean => {
-  if (!day) return false
+  if (!day) return false;
   return (
     day.getFullYear() === today.getFullYear() &&
     day.getMonth() === today.getMonth() &&
     day.getDate() === today.getDate()
-  )
-}
+  );
+};
 
 // 判斷該天是否有事件
 const hasEvent = (day: Date | null): boolean => {
-  if (!day) return false
-  const dateStr = formatDate(day)
-  return calendarStore.getEventByDate(dateStr).length > 0
-}
+  if (!day) return false;
+  const dateStr = formatDate(day);
+  return calendarStore.getEventByDate(dateStr).length > 0;
+};
+
+/* 經典的 JavaScript Date 物件月份溢位 (month overflow) 問題。
+  例如日期是：2025-10-31
+  呼叫 setMonth(currentMonth + 1) → 嘗試設定為 11月31日
+  但 11月只有30天，所以 JavaScript 自動進位為 12月1日！
+  因此顯示跳過了 11 月。
 
 // 上個月
 const prevMonth = (): void => {
@@ -78,10 +84,27 @@ const nextMonth = (): void => {
   currentDate.value = newDate
 }
 
+}
+*/
+
 // 點選日期時發送事件
 const selectDate = (day: Date) => {
-  emit('select-date', day)
-}
+  emit("select-date", day);
+};
+
+const prevMonth = (): void => {
+  const newDate = new Date(currentDate.value);
+  newDate.setDate(1); // 🩹 修正：先設為當月1日
+  newDate.setMonth(newDate.getMonth() - 1);
+  currentDate.value = newDate;
+};
+
+const nextMonth = (): void => {
+  const newDate = new Date(currentDate.value);
+  newDate.setDate(1); // 🩹 修正：先設為當月1日
+  newDate.setMonth(newDate.getMonth() + 1);
+  currentDate.value = newDate;
+};
 </script>
 
 <template>
@@ -227,9 +250,18 @@ const selectDate = (day: Date) => {
 }
 
 @keyframes pulse {
-  0% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.2); opacity: 0.7; }
-  100% { transform: scale(1); opacity: 1; }
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 /* RWD（手機版） */
@@ -257,4 +289,3 @@ const selectDate = (day: Date) => {
   }
 }
 </style>
-
